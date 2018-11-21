@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/play-with-docker/play-with-docker/pwd"
+	"github.com/lean-soft/play-with-docker/pwd"
 )
 
 func SessionSetup(rw http.ResponseWriter, req *http.Request) {
@@ -28,7 +28,7 @@ func SessionSetup(rw http.ResponseWriter, req *http.Request) {
 		if pwd.SessionNotEmpty(err) {
 			log.Println("Cannot setup a session that contains instances")
 			rw.WriteHeader(http.StatusConflict)
-			rw.Write([]byte("Cannot setup a session that contains instances"))
+			rw.Write([]byte("不能在存在实例的会话中使用模版，清除现有实例重试！"))
 			return
 		}
 		log.Println(err)

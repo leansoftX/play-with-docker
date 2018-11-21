@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/play-with-docker/play-with-docker/event"
-	"github.com/play-with-docker/play-with-docker/pwd"
-	"github.com/play-with-docker/play-with-docker/pwd/types"
-	"github.com/play-with-docker/play-with-docker/storage"
+	"github.com/lean-soft/play-with-docker/event"
+	"github.com/lean-soft/play-with-docker/pwd"
+	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/lean-soft/play-with-docker/storage"
 	"github.com/stretchr/testify/assert"
 )
 

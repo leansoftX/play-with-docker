@@ -31,8 +31,8 @@
     $scope.connected = false;
     $scope.type = {windows: false};
     $scope.isInstanceBeingCreated = false;
-    $scope.newInstanceBtnText = '+ Add new instance';
-    $scope.deleteInstanceBtnText = 'Delete';
+    $scope.newInstanceBtnText = '+ 创建新实例';
+    $scope.deleteInstanceBtnText = '删除';
     $scope.isInstanceBeingDeleted = false;
     $scope.uploadProgress = 0;
 
@@ -45,7 +45,7 @@
             $scope.uploadProgress = 0;
             return
           }
-          $scope.uploadMessage = "Uploading file(s) " + (total - files.length) + "/"+ total + " : " + file.name;
+          $scope.uploadMessage = "正在上传文件 "+ file.name + "。 已经完成" + (total - files.length) + "， 总大小"+ total ;
           let upload = Upload.upload({url: '/sessions/' + $scope.sessionId + '/instances/' + $scope.selectedInstance.name + '/uploads', data: {file: file}, method: 'POST'})
             .then(function(){}, function(){}, function(evt) {
               $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total);
@@ -85,7 +85,7 @@
         .clickOutsideToClose(true)
         .title(title)
         .textContent(content)
-        .ok('Got it!')
+        .ok('收到！')
       ).finally(function() {
         if (cb) {
            cb();
@@ -130,9 +130,9 @@
         $scope.upsertInstance(response.data);
       }, function(response) {
         if (response.status == 409) {
-          $scope.showAlert('Max instances reached', 'Maximum number of instances reached')
+          $scope.showAlert('最大实例限制', '已经达到最大实例限制')
         } else if (response.status == 503 && response.data.error == 'out_of_capacity') {
-          $scope.showAlert('Out Of Capacity', 'We are really sorry. But we are currently out of capacity and cannot create new instances. Please try again later.')
+          $scope.showAlert('超负荷', '非常抱歉，服务器现在已经超负荷运行，无法创建更多实例。请稍后重试')
         }
       }).finally(function() {
         updateNewInstanceBtnState(false);
@@ -280,7 +280,7 @@
         });
 
         socket.on('session end', function() {
-          $scope.showAlert('Session timed out!', 'Your session has expired and all of your instances have been deleted.', '#sessionEnd', function() {
+          $scope.showAlert('实验已结束！', '你的实验会话已经结束，所有实例将被删除.', '#sessionEnd', function() {
             window.location.href = '/';
           });
           $scope.isAlive = false;
@@ -519,20 +519,20 @@
 
     function updateNewInstanceBtnState(isInstanceBeingCreated) {
       if (isInstanceBeingCreated === true) {
-        $scope.newInstanceBtnText = '+ Creating...';
+        $scope.newInstanceBtnText = '+ 创建中 ...';
         $scope.isInstanceBeingCreated = true;
       } else {
-        $scope.newInstanceBtnText = '+ Add new instance';
+        $scope.newInstanceBtnText = '+ 创建新实例';
         $scope.isInstanceBeingCreated = false;
       }
     }
 
     function updateDeleteInstanceBtnState(isInstanceBeingDeleted) {
       if (isInstanceBeingDeleted === true) {
-        $scope.deleteInstanceBtnText = 'Deleting...';
+        $scope.deleteInstanceBtnText = '删除中 ...';
         $scope.isInstanceBeingDeleted = true;
       } else {
-        $scope.deleteInstanceBtnText = 'Delete';
+        $scope.deleteInstanceBtnText = '删除';
         $scope.isInstanceBeingDeleted = false;
       }
     }
@@ -640,7 +640,7 @@
   .service("SessionService", function($http) {
 	var templates = [
 		{
-			title: '3 Managers and 2 Workers',
+			title: '3管理节点和2个工作节点',
 			icon: '/assets/swarm.png',
 			setup: {
 				instances: [
@@ -653,7 +653,7 @@
 			}
 		},
 		{
-			title: '5 Managers and no workers',
+			title: '5个管理节点',
 			icon: '/assets/swarm.png',
 			setup: {
 				instances: [
@@ -744,13 +744,13 @@
     function getAvailablePresets() {
       return [
         { name : "None", presets : [
-          { description : "Toggle terminal fullscreen", command : "Alt+enter", altKey : true, keyCode : 13, action : function(context) { TerminalService.toggleFullscreen(context.terminal, resizeFunc); }}
+          { description : "切换全屏", command : "Alt+enter", altKey : true, keyCode : 13, action : function(context) { TerminalService.toggleFullscreen(context.terminal, resizeFunc); }}
         ] },
         {
           name : "Mac OSX",
           presets : [
-            { description : "Clear terminal", command : "Cmd+K", metaKey : true, keyCode : 75, action : function(context) { context.terminal.clear(); }},
-            { description : "Toggle terminal fullscreen", command : "Alt+enter", altKey : true, keyCode : 13, action : function(context) { TerminalService.toggleFullscreen(context.terminal, resizeFunc); }}
+            { description : "清除终端", command : "Cmd+K", metaKey : true, keyCode : 75, action : function(context) { context.terminal.clear(); }},
+            { description : "切换全屏", command : "Alt+enter", altKey : true, keyCode : 13, action : function(context) { TerminalService.toggleFullscreen(context.terminal, resizeFunc); }}
           ]
         }
       ]
@@ -767,7 +767,7 @@
       var preset = getAvailablePresets()
       .filter(function(preset) { return preset.name == shortcuts; });
       if (preset.length == 0)
-        console.error("Unable to find preset with name '" + shortcuts + "'");
+        console.error("无法找到预置名'" + shortcuts + "'");
       return preset[0];
       return (shortcuts == null) ? null : JSON.parse(shortcuts);
     }

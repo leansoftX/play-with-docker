@@ -56,7 +56,7 @@ func ParseFlags() {
 	flag.StringVar(&CookieHashKey, "cookie-hash-key", "", "Hash key to use to validate cookies")
 	flag.StringVar(&CookieBlockKey, "cookie-block-key", "", "Block key to use to encrypt cookies")
 	flag.StringVar(&DefaultDinDImage, "default-dind-image", "franela/dind", "Default DinD image to use if not specified otherwise")
-	flag.StringVar(&DefaultSessionDuration, "default-session-duration", "4h", "Default session duration if not specified otherwise")
+	flag.StringVar(&DefaultSessionDuration, "default-session-duration", "1h", "Default session duration if not specified otherwise")
 
 	flag.StringVar(&PlaygroundDomain, "playground-domain", "localhost", "Domain to use for the playground")
 	flag.StringVar(&AdminToken, "admin-token", "", "Token to validate admin user for admin endpoints")

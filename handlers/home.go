@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/gorilla/mux"
-	"github.com/play-with-docker/play-with-docker/storage"
+	"github.com/lean-soft/play-with-docker/storage"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -35,6 +35,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	index := filepath.Join("./www", playground.AssetsDir, "/index.html")
+	log.Printf("Serving index page from %s", index)
 	if _, err := os.Stat(index); os.IsNotExist(err) {
 		index = "./www/default/index.html"
 	}

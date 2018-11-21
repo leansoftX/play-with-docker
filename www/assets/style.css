@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Rationale');
+@import url('/assets/googlefonts/css/Rationale.css');
 
 .selected button {
     background-color: rgba(158,158,158,0.2);

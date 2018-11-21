@@ -1,12 +1,14 @@
 <!doctype html>
 <html ng-app="DockerPlay" ng-controller="PlayController">
     <head>
-        <title>Docker Playground</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons" />
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <title>Docker 实验室 | LEANSOFT</title>
+        <link rel="stylesheet" href="/assets/googlefonts/css/Roboto.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="/assets/libs/angular_material/1.1.0/angular-material.min.css">
         <link rel="stylesheet" href="/assets/xterm.css" />
-	<link rel="stylesheet" href="/assets/xterm-addons/fullscreen.css" />
+	    <link rel="stylesheet" href="/assets/xterm-addons/fullscreen.css" />
         <link rel="stylesheet" href="/assets/style.css" />
+        <!-- disable google analytics
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -15,7 +17,19 @@
             ga('create', 'UA-89019737-1', 'auto');
             ga('send', 'pageview');
         </script>
+        -->
     </head>
+    
+    <script type="text/javascript">
+        var appInsights=window.appInsights||function(a){
+          function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
+          }({
+              instrumentationKey:"1c11d92c-2092-4a71-b5ca-8fff6c66a34a"
+          });
+          
+        window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+    </script>
+    
     <body>
 
         <div layout="column" style="height:100%;" ng-cloak>
@@ -23,7 +37,7 @@
               <md-content flex layout-padding ng-if="!instances.length">
                 <div layout="column" layout-align="top center">
                   <p>
-                    <strong>Your session has expired.</strong>
+                    <strong>会话已过期。</strong>
                   </p>
                 </div>
                 <div flex></div>
@@ -31,7 +45,7 @@
             </section>
 
             <section ng-if="!connected" class="disconnected" layout="row" layout-align="center center">
-                <h1 class="md-headline">No connection to server. Reconnecting...</h1>
+                <h1 class="md-headline">服务器连接中断。正在重建连接，请稍后 ... </h1>
                 <md-progress-circular class="md-hue-2" md-diameter="20px"></md-progress-circular>
             </section>
 
@@ -44,37 +58,42 @@
 
                 <md-toolbar class="md-theme-indigo">
                   <span class="clock">{{ttl}}</span>
-                  <md-button class="md-warn md-raised" ng-click="closeSession()">Close session</md-button>
+                  <md-button class="md-warn md-raised" ng-click="closeSession()">结束实验</md-button>
                   <div class="md-toolbar-tools">
-                    <h1 class="md-toolbar-tools">Instances</h1>
+                    <h1 class="md-toolbar-tools">实例列表</h1>
                     <templates-icon></templates-icon>
                     <settings-icon></settings-icon><br/>
                   </div>
                   <div class="md-toolbar-tools" ng-if="playground.allow_windows_instances">
                       <md-switch ng-model="type.windows">
-                          Windows containers {{windows}}
+                          Windows 容器 {{windows}}
                       </md-switch>
                   </div>
                 </md-toolbar>
                 <md-content layout-padding>
-                  <md-button ng-click="newInstance()" ng-disabled="isInstanceBeingCreated" class="md-primary">{{newInstanceBtnText}}</md-button>
-              <md-list class="md-dense" flex>
-                <md-list-item ng-switch on="instance.isManager || instance.isK8sManager" class="md-2-line" ng-repeat="instance in instances | orderBy:'hostname'" ng-click="showInstance(instance)" ng-class="instance.name == selectedInstance.name ? 'selected' : false">
-                    <md-icon ng-switch-when="true" style="color: blue" md-svg-icon="person"></md-icon>
-                    <md-icon ng-switch-when="false" md-svg-icon="person-outline"></md-icon>
-                    <div class="md-list-item-text" layout="column">
-                        <h3>{{instance.ip}}</h3>
-                        <h4>{{instance.hostname}}</h4>
-                    </div>
-                    <md-divider ng-if="!$last"></md-divider>
-                </md-list-item>
-              </md-list>
+                    <md-list class="md-dense" flex>
+                        <md-list-item>
+                            <h3><a href="#" onclick="return openDocWindow('http://docs.devopshub.cn/mdwiki/#!./docs/docker/basic/01-docker-commands/index.md');" target="_blank">Docker基础操作教程</a></h3>
+                        </md-list-item>
+                    </md-list>
+                    <md-button ng-click="newInstance()" ng-disabled="isInstanceBeingCreated" class="md-primary">{{newInstanceBtnText}}</md-button>
+                    <md-list class="md-dense" flex>
+                        <md-list-item ng-switch on="instance.isManager || instance.isK8sManager" class="md-2-line" ng-repeat="instance in instances | orderBy:'hostname'" ng-click="showInstance(instance)" ng-class="instance.name == selectedInstance.name ? 'selected' : false">
+                            <md-icon ng-switch-when="true" style="color: blue" md-svg-icon="person"></md-icon>
+                            <md-icon ng-switch-when="false" md-svg-icon="person-outline"></md-icon>
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{instance.ip}}</h3>
+                                <h4>{{instance.hostname}}</h4>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
                 </md-content>
               </md-sidenav>
               <md-content flex layout-padding ng-if="!instances.length">
                 <div layout="column" layout-align="top center">
-                  <p>Add instances to your playground.</p>
-                  <p><strong>Sessions and all their instances are deleted after {{ttl}} hours.</strong></p>
+                  <p>你的会话中没有实例，请点击“创建新实例”添加</p>
+                  <p><strong>本次实验室会话剩余 {{ttl}}，所有实例和容器将在到期时自动删除。</strong></p>
                 </div>
 
                 <div flex></div>
@@ -105,7 +124,7 @@
                           </div>
                           <div layout-gt-sm="row">
                              <md-input-container class="md-block" flex-gt-sm>
-                               <label>Memory</label>
+                               <label>内存</label>
                                <input ng-model="instance.mem" type="text" readonly="readonly">
                              </md-input-container>
                              <md-input-container class="md-block" flex-gt-sm>
@@ -118,7 +137,7 @@
                                <label>SSH</label>
                                <input value="ssh {{instance.proxy_host}}@direct.{{host}}" type="text" readonly="readonly" size="50">
                                <md-icon ngclipboard data-clipboard-text="ssh {{instance.proxy_host}}@direct.{{host}} "class="material-icons">content_copy
-                                    <md-tooltip md-direction="top">Copy!</md-tooltip>
+                                    <md-tooltip md-direction="top">复制!</md-tooltip>
                                </md-icon>
                              </md-input-container>
                              <div class="md-block" glex-gt-sm></div>
@@ -127,7 +146,7 @@
                       <md-card-actions>
                           <md-button class="md-warn md-raised" ng-click="deleteInstance(instance)" ng-disabled="isInstanceBeingDeleted">{{deleteInstanceBtnText}}</md-button>
                           <md-button class="md-raised" ng-click="openEditor(instance)">
-                              <md-icon class="material-icons">insert_drive_file</md-icon> Editor
+                              <md-icon class="material-icons">insert_drive_file</md-icon> 编辑器
                           </md-button>
                       </md-card-actions>
                   </md-card>
@@ -138,7 +157,7 @@
                                <span>{{uploadMessage}}</span>
                            </div>
                       </div>
-                      <div ng-show="instance.status=='reconnect'" class="uploadStatus">Connection has been lost. Sometimes this happens when a windows instance is joining a swarm. Trying to reconnect terminal...</div>
+                      <div ng-show="instance.status=='reconnect'" class="uploadStatus">服务器连接丢失，当Windows节点加入集群时由可能发生这种情况，请刷新页面重新链接 ...</div>
                       <md-card-content flex id="terminal-{{instance.name}}" class="terminal-container">
                       </md-card-content>
                   </md-card>
@@ -151,26 +170,26 @@
                 <md-dialog>
                     <md-toolbar>
                          <div class="md-toolbar-tools">    
-                             <h2>Session stack builder</h2>
+                             <h2>会话创建器</h2>
                              <span flex></span>            
                          </div>                            
                     </md-toolbar>
                     <md-dialog-content layout-padding>
                         <div flex="100" style="margin: 20px 0px;">
-                            We are building your stack. This might take a while.<br/>
+                            正在创建你的环境，请稍后。<br/>
                         </div>
                         <div id="builder-terminal"  style="height: 450px; width: 800px">
                         </div>
                         <div layout="row" ng-if="ready">
                             <div flex="100" style="margin-top: 20px; text-align:center; font-weight: bold; color: green;">
-                                Your session is ready!
+                                会话准备完毕。
                             </div>
                         </div>
                     </md-dialog-content>
                     <md-dialog-actions layout="row" ng-if="ready">
                         <span flex></span>
                         <md-button ng-click="closeSessionBuilder()">
-                            Close
+                            关闭
                         </md-button>
                     </md-dialog-actions>
                 </md-dialog>
@@ -181,10 +200,10 @@
         <script type="text/ng-template" id="templates-modal.html">
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <h2>Templates</h2>
+                    <h2>Swarm集群模版</h2>
                     <span flex></span>
                     <md-button class="md-icon-button" ng-click="$ctrl.close()">
-                        <md-icon class="material-icon" aria-label="Close dialog">close</md-icon>
+                        <md-icon class="material-icon" aria-label="Close dialog">关闭</md-icon>
                     </md-button>
                 </div>
                 </md-toolbar>
@@ -218,14 +237,14 @@
                 <md-dialog-actions layout="row">
                     <span flex></span>
                     <md-button ng-click="$ctrl.close()">
-                        Close
+                        关闭
                     </md-button>
                 </md-dialog-actions>
         </script>
         <script type="text/ng-template" id="settings-modal.html">
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <h2>Settings</h2>
+                    <h2>设置</h2>
                     <span flex></span>
                     <md-button class="md-icon-button" ng-click="$ctrl.close()">
                         <md-icon class="material-icon" aria-label="Close dialog">close</md-icon>
@@ -238,7 +257,7 @@
                     <div layout="row">
                         <div flex="50">
                             <md-input-container class="md-block" flex-gt-sm>
-                                <label>Keyboard Shortcut Preset</label>
+                                <label>快捷键设置</label>
                                 <md-select ng-model="$ctrl.currentShortcutConfig" ng-model-options="{getterSetter: true}" placeholder="Keyboard shortcut prefix">
                                     <md-option ng-repeat="preset in $ctrl.keyboardShortcutPresets" value="{{preset}}">
                                         {{preset.name}}
@@ -249,9 +268,9 @@
                         <div flex="10"></div>
                         <div flex="40">
                             <div ng-if="$ctrl.selectedShortcutPreset">
-                                Preset details:
+                                详细信息:
                                 <ul>
-                                    <li ng-if="$ctrl.selectedShortcutPreset.presets.length == 0">No presets defined</li>
+                                    <li ng-if="$ctrl.selectedShortcutPreset.presets.length == 0">未设置</li>
                                     <li ng-repeat="preset in $ctrl.selectedShortcutPreset.presets">
                                         <code>{{preset.command}}</code> - {{preset.description}}
                                     </li>
@@ -262,7 +281,7 @@
                     <div layout="row">
                         <div flex="50">
                             <md-input-container class="md-block" flex-gt-sm>
-                                <label>Instance Image</label>
+                                <label>实例镜像(DinD)</label>
                                 <md-select ng-model="$ctrl.currentDesiredInstanceImage" ng-model-options="{getterSetter: true}" placeholder="New Instance Image">
                                     <md-option ng-repeat="image in $ctrl.instanceImages" value="{{image}}">
                                         {{ image }}
@@ -274,7 +293,7 @@
                     <div layout="row">
                         <div flex="50">
                             <md-input-container class="md-block" flex-gt-sm>
-                                <label>Terminal Font Size</label>
+                                <label>终端字体大小</label>
                                 <md-select ng-model="$ctrl.currentTerminalFontSize" ng-model-options="{getterSetter: true}">
                                     <md-option ng-repeat="size in $ctrl.terminalFontSizes" value="{{size}}">
                                         {{ size }}
@@ -289,46 +308,63 @@
                 <md-dialog-actions layout="row">
                     <span flex></span>
                     <md-button ng-click="$ctrl.close()">
-                        Close
+                        关闭
                     </md-button>
                 </md-dialog-actions>
         </script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js" integrity="sha256-A4JwlcDvqO4JXpvEtvWY1RH8JAEMu5W21wP8GUXLUNs=" crossorigin="anonymous"></script>
-	<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
+	<script src="/assets/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js" integrity="sha256-A4JwlcDvqO4JXpvEtvWY1RH8JAEMu5W21wP8GUXLUNs=" crossorigin="anonymous"></script>
+	<script src="/assets/libs/jquery/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-        <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngclipboard/1.1.2/ngclipboard.min.js"></script>
+    <script src="/assets/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="/assets/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="/assets/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="/assets/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="/assets/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="/assets/libs/clipboard/clipboard.min.js"></script>
+    <script src="/assets/libs/ngclipboard/1.1.2/ngclipboard.min.js"></script>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js" integrity="sha256-LrZq3efIkFX0BooX7x/rjWyYDvMKfFV2HJpy6HBw7cE=" crossorigin="anonymous"></script>
+    <script src="/assets/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js" integrity="sha256-LrZq3efIkFX0BooX7x/rjWyYDvMKfFV2HJpy6HBw7cE=" crossorigin="anonymous"></script>
 
-        <script src="/assets/app.js"></script>
-        <script src="/assets/xterm.js"></script>
-        <script src="/assets/xterm-addons/fit.js"></script>
-        <script src="/assets/xterm-addons/fullscreen.js"></script>
-        <script src="/assets/attach.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+    <script src="/assets/app.js"></script>
+    <script src="/assets/xterm.js"></script>
+    <script src="/assets/xterm-addons/fit.js"></script>
+    <script src="/assets/xterm-addons/fullscreen.js"></script>
+    <script src="/assets/attach.js"></script>
+    <script src="/assets/libs/moment.js/2.16.0/moment.min.js"></script>
         <script type="text/javascript" charset="utf-8">
             window.onbeforeunload = function (e) {
                 e = e || window.event;
 
                 // For IE and Firefox prior to version 4
                 if (e) {
-                    e.returnValue = 'Make sure you saved your session URL';
+                    e.returnValue = '保存你的实验室URL，这样下次还可以进入同一个会话。';
                 }
 
                 // For Safari
-                return 'Make sure you saved your session URL';
+                return '保存你的实验室URL，这样下次还可以进入同一个会话。';
             };
+
+            function openRemoteWindow(url) {
+                var scrollWidth = 30;
+                var percent = 70;
+                var screenW = screen.width * percent / 100;
+                var left = screen.width * (percent / 100) - scrollWidth;
+                var screenH = screen.height;
+                var popup = window.open(url, '_blank', 'toolbar=no, menubar=no,scrollbars=1,resizable=1,titlebar=0,location=0, height=' + screenH + ', width=' + screenW + 'top=0,left='+left);
+                popup.focus();
+                return false;
+            }
+            function openDocWindow(url) {
+                var scrollWidth = 30;
+                var percent = 30;
+                var screenW = screen.width * (percent / 100) - scrollWidth;
+                var screenH = screen.height;
+                var popup = window.open(url, '_blank', 'toolbar=no, menubar=no,scrollbars=1,resizable=1,titlebar=0,location=0, height=' + screenH + ', width=' + screenW+'top=0,left=0');
+                popup.focus();
+                return false;
+            }
         </script>
     </body>
 </html>

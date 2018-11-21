@@ -5,22 +5,48 @@ import (
 	"os"
 	"time"
 
-	"github.com/play-with-docker/play-with-docker/config"
-	"github.com/play-with-docker/play-with-docker/docker"
-	"github.com/play-with-docker/play-with-docker/event"
-	"github.com/play-with-docker/play-with-docker/handlers"
-	"github.com/play-with-docker/play-with-docker/id"
-	"github.com/play-with-docker/play-with-docker/k8s"
-	"github.com/play-with-docker/play-with-docker/provisioner"
-	"github.com/play-with-docker/play-with-docker/pwd"
-	"github.com/play-with-docker/play-with-docker/pwd/types"
-	"github.com/play-with-docker/play-with-docker/scheduler"
-	"github.com/play-with-docker/play-with-docker/scheduler/task"
-	"github.com/play-with-docker/play-with-docker/storage"
+	"github.com/lean-soft/play-with-docker/config"
+	"github.com/lean-soft/play-with-docker/docker"
+	"github.com/lean-soft/play-with-docker/event"
+	"github.com/lean-soft/play-with-docker/handlers"
+	"github.com/lean-soft/play-with-docker/id"
+	"github.com/lean-soft/play-with-docker/k8s"
+	"github.com/lean-soft/play-with-docker/provisioner"
+	"github.com/lean-soft/play-with-docker/pwd"
+	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/lean-soft/play-with-docker/scheduler"
+	"github.com/lean-soft/play-with-docker/scheduler/task"
+	"github.com/lean-soft/play-with-docker/storage"
 )
 
 func main() {
+
 	config.ParseFlags()
+
+	//todo: allow reading configuration from file or env-var
+	var domain = os.Getenv("PLAYGROUND_DOMAIN")
+	var image = os.Getenv("DEFAULT_DIND_IMAGE")
+	var assetsDir = os.Getenv("ASSETS_DIR")
+	var defaultSessionDuration = os.Getenv("DefaultSessionDuration")
+
+	// update this before docker build and fill in actual target domain name
+	// e.g. play-with-docker.cn
+	//		play-with-k8s.cn
+	// for local develoment, leave this blank or use localhost
+	config.PlaygroundDomain = domain
+
+	// update this for the DinD image name
+	// e.g. pwd use franela/dind
+	//		pwk use franela/k8s
+	config.DefaultDinDImage = image
+
+	// set default session duration
+	config.DefaultSessionDuration = defaultSessionDuration
+
+	log.Println("Env PLAYGROUND_DOMAIN=" + domain)
+	log.Println("Env DEFAULT_DIND_IMAGE=" + image)
+	log.Println("Env ASSETS_DIR=" + assetsDir)
+	log.Println("Env DefaultSessionDuration=" + defaultSessionDuration)
 
 	e := initEvent()
 	s := initStorage()
@@ -52,7 +78,19 @@ func main() {
 		log.Fatalf("Cannot parse duration %s. Got: %v", config.DefaultSessionDuration, err)
 	}
 
-	playground := types.Playground{Domain: config.PlaygroundDomain, DefaultDinDInstanceImage: config.DefaultDinDImage, AllowWindowsInstances: config.NoWindows, DefaultSessionDuration: d, AvailableDinDInstanceImages: []string{config.DefaultDinDImage}, Tasks: []string{".*"}}
+	// todo: update this using env-var
+	// update AssetDir to switch between pwd and pwk deployment
+	// pwd: default
+	// pwk: k8s
+	playground := types.Playground{
+		Domain: config.PlaygroundDomain,
+		DefaultDinDInstanceImage:    config.DefaultDinDImage,
+		AllowWindowsInstances:       config.NoWindows,
+		DefaultSessionDuration:      d,
+		AvailableDinDInstanceImages: []string{config.DefaultDinDImage},
+		AssetsDir:                   assetsDir,
+		Tasks:                       []string{".*"}}
+
 	if _, err := core.PlaygroundNew(playground); err != nil {
 		log.Fatalf("Cannot create default playground. Got: %v", err)
 	}

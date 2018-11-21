@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Rationale';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Rationale/Rationale.eot);
+  src: local('Rationale'), local('Rationale-Regular'), url(../fonts/Rationale/Rationale.eot?#iefix) format('embedded-opentype'), url(../fonts/Rationale/Rationale.woff) format('woff'), url(../fonts/Rationale/Rationale.ttf) format('truetype'), url(../fonts/Rationale/Rationale.woff2) format('woff2'), url(../fonts/Rationale/Rationale.svg#Rationale) format('svg');
+}
+

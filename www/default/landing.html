@@ -2,69 +2,313 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="PWDLanding" ng-controller="LoginController">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-cookies.js"></script>
+    <script src="/assets/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="/assets/libs/angularjs/1.6.6/angular-cookies.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Play with Docker</title>
+    <title>Docker 实验室 | LEANSOFT</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/libs/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
+    <link href="/assets/libs/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+    <link href="/assets/libs/landing-page/landing-page.css" rel="stylesheet">
     <link href="/assets/landing.css" rel="stylesheet">
     
   </head>
 
+  <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){
+      function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
+      }({
+          instrumentationKey:"1c11d92c-2092-4a71-b5ca-8fff6c66a34a"
+      });  
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  
   <body>
 
-    <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/play-with-docker/play-with-docker">Contribute</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+  <body>
 
-      <div class="jumbotron" ng-cloak> 
-        <img src="https://www.docker.com/sites/default/files/Whale%20Logo332_5.png" />
-        <h1 class="display-3">Play with Docker</h1>
-        <p class="lead">A simple, interactive and fun playground to learn Docker</p>
-        <div ng-hide="loggedIn" class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Login
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a ng-repeat="provider in providers" class="dropdown-item" ng-click="login(provider)">{{provider}}</a>
-          </div>
-        </div>        
-        <form id="landingForm" method="POST" action="/">
-            <p ng-show="loggedIn"><a class="btn btn-lg btn-success" href="#" ng-click="start()" role="button">Start</a></p>
-                <input id="stack" type="hidden" name="stack" value=""/>
-                <input id="stack_name" type="hidden" name="stack_name" value=""/>
-                <input id="image_name" type="hidden" name="image_name" value=""/>
-        </form>
-      </div>
+    <!-- Navigation --> 
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="font-size:medium">
+        <a class="navbar-brand" href="/">
+            <div class="features-icons-icon">
+                    <i class="icon-layers"></i>
+                        Docker实验室
+                    </div>
+            </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">首页<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">敏捷</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="font-size:small">
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/agile/01-product-design/index.md">可视化产品设计</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/agile/02-product-planning/index.md">影响地图和用户故事地图在TFS上的应用</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Git</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="font-size:small">
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/g4e/index.md">Git企业开发者教程</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/g4e/index.md">Git常见问题</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">微软研发云</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="font-size:small">
+                        <a class="dropdown-item" href="https://almvm.devopshub.cn/labs/tfs/">Team Foundation Server 操作手册</a>
+                        <a class="dropdown-item" href="https://almvm.devopshub.cn/labs/vsts/">Team Services 操作手册</a>
+                        <a class="dropdown-item" href="https://almvm.devopshub.cn/labs/java/">Java DevOps 操作手册</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/training/azure-devops/index.md">云端开发训练营</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/tfs/pipeline/index.md">TFS持续交付流水线</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/tfs/sysadmin/index.md">TFS安装配置及系统管理</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/sde/index.md">标准开发环境配置手册</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/tfs/faqs/index.md">TFS常见问题</a>
+                    </div>
+                </li>
 
-      <div class="row marketing">
-        <div class="col-lg-12">
-            <p>Play with Docker (PWD) is a project hacked by <a href="https://www.twitter.com/marcosnils">Marcos Liljedhal</a> and <a href="https://www.twitter.com/xetorthio">Jonathan Leibiusky</a> and sponsored by Docker Inc.</p>
-            <p>PWD is a Docker playground which allows users to run Docker commands in a matter of seconds. It gives the experience of having a free Alpine Linux Virtual Machine in browser, where you can build and run Docker containers and even create clusters in <a href="https://docs.docker.com/engine/swarm/">Docker Swarm Mode</a>. Under the hood Docker-in-Docker (DinD) is used to give the effect of multiple VMs/PCs. In addition to the playground, PWD also includes a training site composed of a large set of Docker labs and quizzes from beginner to advanced level available at <a href="http://training.play-with-docker.com/">training.play-with-docker.com</a>.</p>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">开源解决方案</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="font-size:small">
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/training/gitlab-jenkins-docker-pipeline/index.md">开源流水线实验手册</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/training/jenkins-hols/index.md">Jenkins动手实验</a>
+                  
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Docker & 容器</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="font-size:small">
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/docker/install/index.md">Docker环境配置</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/docker/basic/index.md">Docker基本操作</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/docker/mesos/index.md">容器编排平台Apache Mesos</a>
+                        <a class="dropdown-item" href="https://docs.devopshub.cn/mdwiki/#!docs/docker/Windows/index.md">Windows容器技术</a>
+                        
+                    </div>
+                </li>
+           
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">实验室</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="font-size:small">
+                        <a class="dropdown-item" href="http://labs.devopshub.cn">DevOps实验室</a>
+                        <a class="dropdown-item" href="http://play-with-docker.cn">Docker实验室</a>
+                        <a class="dropdown-item" href="http://play-with-k8s.cn">K8s实验室</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://devopshub.cn/">博客</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">联系方式</a>
+                </li>
+            </ul>
         </div>
-      </div>
+    </nav>
 
-      <footer class="footer">
-        <p>&copy; Play with Docker 2017</p>
-      </footer>
+
+    <!-- PWD content -->
+    <div class="jumbotron" ng-cloak> 
+    <img src="/assets/WhaleLogo332_5.png" />
+    <h1 class="display-3">Docker 实验室</h1>
+    <p class="lead">简单易用的docker实验室，一键创建环境，立即开始学习</p>
+    <div ng-hide="loggedIn" class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Login
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a ng-repeat="provider in providers" class="dropdown-item" ng-click="login(provider)">{{provider}}</a>
+        </div>
+    </div>        
+    <form id="landingForm" method="POST" action="/">
+        <p ng-show="loggedIn"><a class="btn btn-lg btn-success" href="#" ng-click="start()" role="button">开始实验</a></p>
+            <input id="stack" type="hidden" name="stack" value=""/>
+            <input id="stack_name" type="hidden" name="stack_name" value=""/>
+            <input id="image_name" type="hidden" name="image_name" value=""/>
+    </form>
+    </div>
+
+    <div class="row marketing">
+    <div class="col-lg-12">
+        <p>Play with Docker (PWD) 是由 <a href="https://github.com/marcosnils">Marcos Liljedhal</a> 和 <a href="https://github.com/xetorthio">Jonathan Leibiusky</a> 两位工程师在Docker Inc.的支援下创建的。</p>
+        <p>PWD是一个docker在线实验环境，允许你快速运行任何docker命令。
+            通过使用容器嵌套技术（Docker in Docker - DinD)，PWD可以在几秒钟内快速创建大量服务器节点供学员使用，同时提供
+            基于 <a href="https://docs.docker.com/engine/swarm/">Docker Swarm 模式</a>的服务器集群模版，可以一键创建多节点集群环境。
+            我们还提供了大量的培训教程帮助你逐步提供自己的docker实操能力，这些教程放置在 <a href="https://docs.devopshub.cn">DevOps文档中心</a>。
+        </p>
+        <p>
+            PWD中文版由LEANSOFT实现中文本地化，托管于微软Azure世纪互联（北京节点）上，旨在帮助中国的技术人员快速熟悉并学习docker的使用技巧。
+        </p>
+        <p>此应用使用微软DevOps工具链进行自动化构建和部署，当前部署状态<img src="https://tfs.devopshub.cn/leansoft/_apis/public/Release/badge/580b5af0-a2f5-4585-8ed6-dddf6a84502d/9/23"/></p>
+    </div>
+    </div>
+
+    <!-- Prompted documents -->
+    <div style="padding:20px">
+        <div class="row">
+        <div class="col-md-4">
+            <h4> <i class="icon-docs"></i> 最新文档</h4>
+                <div class="list-group">
+                        <br/>
+                        <li>
+                            <a href="https://almvm.devopshub.cn" target="_blank" style="color:darkslategrey">微软研发云动手实验</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/tfs/sysadmin/index.md" target="_blank" style="color:darkslategrey">TFS安装部署手册</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/tfs/fqas/excel-tfs-analysis-report/index.md" target="_blank" style="color:darkslategrey">使用 Excel 创建 TFS Analysis 报表</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/training/jenkins-hols/index.md" target="_blank" style="color:darkslategrey">Jenkins动手实验</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/training/gitlab-jenkins-docker-pipeline/index.md" target="_blank" style="color:darkslategrey">基于Docker的DevOps实战培训(gitlab jenkins)</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/docker/install/index.md" target="_blank" style="color:darkslategrey">Docker基础环境安装和配置</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/docker/basic/index.md" target="_blank" style="color:darkslategrey">Docker 基础操作</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.devopshub.cn/mdwiki/#!docs/docker/Windows/index.md" target="_blank" style="color:darkslategrey">Windows容器技术</a>
+                        </li>
+                        <br/>
+                        <p> ... <a href="https://docs.devopshub.cn/mdwiki/">更多内容</a></p>
+                </div>
+        </div>
+        <div class="col-md-4">
+            <h4> <i class="icon-globe"></i> 最新博客 </h4>
+                <div class="list-group">
+                        <br/>
+                        <li>
+                            <a href="http://devopshub.cn/2018/01/02/git-enterprise-developer-guide-preface/" target="_blank" style="color:darkslategrey">Git 企业开发者教程</a>
+                        </li>
+                        <li>
+                            <a href="http://devopshub.cn/2017/11/10/vsts-landing-china/" target="_blank" style="color:darkslategrey">微软研发云全家桶VSTS登陆中国</a>
+                        </li>
+                        
+                        <li>
+                            <a href="http://devopshub.cn/2017/05/21/devops-alm-vsts-tfs-timeline/" target="_blank" style="color:darkslategrey">DevOps三步工作法的第一步</a>
+                        </li>
+                        <li>
+                            <a href="http://devopshub.cn/2017/05/10/the-nature-of-software-development/" target="_blank" style="color:darkslategrey">软件开发的自然属性</a>
+                        </li>
+                    
+                        <li>
+                            <a href="http://devopshub.cn/2017/05/18/d4d-8-1-docker-tips-nothing-yielding-fruit-trick/" target="_blank" style="color:darkslategrey">三国杀之Docker锦囊：无中生有</a>
+                        </li>
+                        <li>
+                            <a href="http://devopshub.cn/2017/01/11/docker-container-vm-and-cooking/" target="_blank" style="color:darkslategrey">Docker，容器，虚拟机和红烧肉</a>
+                        </li>
+                        <li>
+                            <a href="http://devopshub.cn/2017/01/06/markdown-rest-release-pipeline/" target="_blank" style="color:darkslategrey">Markdown/reST 文档发布流水线</a>
+                        </li>
+                        <li>
+                            <a href="http://devopshub.cn/2016/09/23/using-vsts-tfs-for-ios-ci/" target="_blank" style="color:darkslategrey">使用VSTS/TFS搭建iOS持续集成环境</a>
+                        </li>
+                        <br/>
+                        <p> ... <a href="http://devopshub.cn/">更多内容</a></p>
+                </div>
+        </div>
+        <div class="col-md-4">
+            <h4> <i class="icon-screen-desktop"></i> 实验环境</h4>
+                <div class="list-group">
+                        <br/>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">微软云容器编排平台(ACS)</a>
+                        </li>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">微软云全托管K8S环境(AKS)</a>
+                        </li>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">Jenkins on Azure</a>
+                        </li>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">Linux VM</a>
+                        </li>
+                    
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">Elastic监控和日志管理平台</a>
+                        </li>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">Gitlab on Azure</a>
+                        </li>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">Docker Swarm实验环境</a>
+                        </li>
+                        <li>
+                            <a href="http://labs.devopshub.cn/Templates" target="_blank" style="color:darkslategrey">Azure DevOpsBootcamp 环境</a>
+                        </li>
+                        <br/>
+                        <p> ... <a href="http://labs.devopshub.cn">更多内容 .</a></p>
+                </div>
+        </div>
+        </div>
+    </div>
+
+      <!-- Call to Action -->
+    <section class="call-to-action text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 a="contact">联系我们</h2>
+                    <p>我们致力于为广大开发人员和企业提供最优化的DevOps/敏捷咨询服务和软件工程解决方案。请扫描二维码加入中国最大的DevOps社区</p>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+                        <li>
+                            <img src="/assets/images/qrcode_for_devopshub.jpg" width="150" height="150" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Footer -->
+    <a name="contact"></a>
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="/">首页</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+
+                        <li class="list-inline-item">
+                            <a href="https://docs.devopshub.cn">文档中心</a>
+                        </li>
+
+                        <li class="list-inline-item">&sdot;</li>
+
+                        <li class="list-inline-item">
+                            <a href="/#contact">联系我们</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">版权所有 &copy; 英捷创软科技(北京)有限公司 2018. All Rights Reserved</p>
+                    <p class="copyright text-muted small">备案号 京ICP备15053665号-8</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     </div> 
 
+    <!--
     [[ if .SegmentId ]]
     <script>
     !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
@@ -73,10 +317,11 @@
     }}();
     </script>
     [[ end ]]
+    -->
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="/assets/libs/jquery/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="/assets/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="/assets/libs/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script>
         angular.module('PWDLanding', [])
             .controller('LoginController', ['$scope', '$http', '$window', function($scope, $http, $window) {
@@ -85,6 +330,9 @@
                 $scope.user = null;
 
                 function checkLoggedIn() {
+                    // just disable login for now
+                    $scope.loggedIn = true;
+                    /*
                     $http({
                         method: 'GET',
                         url: '/users/me'
@@ -102,6 +350,7 @@
                         $scope.user = null;
                         $scope.loggedIn = false;
                     });
+                    */
                 }
 
                 checkLoggedIn();

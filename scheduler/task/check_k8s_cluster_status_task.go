@@ -4,9 +4,9 @@ import (
 	"context"
 	"log"
 
-	"github.com/play-with-docker/play-with-docker/event"
-	"github.com/play-with-docker/play-with-docker/k8s"
-	"github.com/play-with-docker/play-with-docker/pwd/types"
+	"github.com/lean-soft/play-with-docker/event"
+	"github.com/lean-soft/play-with-docker/k8s"
+	"github.com/lean-soft/play-with-docker/pwd/types"
 )
 
 type checkK8sClusterStatusTask struct {

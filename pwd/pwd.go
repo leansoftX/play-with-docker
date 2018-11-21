@@ -7,12 +7,12 @@ import (
 	"net"
 	"time"
 
-	"github.com/play-with-docker/play-with-docker/docker"
-	"github.com/play-with-docker/play-with-docker/event"
-	"github.com/play-with-docker/play-with-docker/id"
-	"github.com/play-with-docker/play-with-docker/provisioner"
-	"github.com/play-with-docker/play-with-docker/pwd/types"
-	"github.com/play-with-docker/play-with-docker/storage"
+	"github.com/lean-soft/play-with-docker/docker"
+	"github.com/lean-soft/play-with-docker/event"
+	"github.com/lean-soft/play-with-docker/id"
+	"github.com/lean-soft/play-with-docker/provisioner"
+	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/lean-soft/play-with-docker/storage"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
