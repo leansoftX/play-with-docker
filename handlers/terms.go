@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lean-soft/play-with-docker/event"
-	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/event"
+	"github.com/leansoftx/play-with-docker/pwd/types"
 
 	"golang.org/x/text/encoding"
 )

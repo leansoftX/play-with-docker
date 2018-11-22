@@ -4,9 +4,9 @@ import (
 	"context"
 	"log"
 
-	"github.com/lean-soft/play-with-docker/event"
-	"github.com/lean-soft/play-with-docker/k8s"
-	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/event"
+	"github.com/leansoftx/play-with-docker/k8s"
+	"github.com/leansoftx/play-with-docker/pwd/types"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

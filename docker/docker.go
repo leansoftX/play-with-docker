@@ -21,7 +21,7 @@ import (
 	"docker.io/go-docker/api/types/swarm"
 	"docker.io/go-docker/api/types/volume"
 	"github.com/containerd/containerd/reference"
-	"github.com/lean-soft/play-with-docker/config"
+	"github.com/leansoftx/play-with-docker/config"
 )
 
 const (

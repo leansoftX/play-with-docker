@@ -3,8 +3,8 @@ package pwd
 import (
 	"log"
 
-	"github.com/lean-soft/play-with-docker/event"
-	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/event"
+	"github.com/leansoftx/play-with-docker/pwd/types"
 	"github.com/satori/go.uuid"
 )
 

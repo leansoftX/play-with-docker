@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lean-soft/play-with-docker/pwd/types"
-	"github.com/lean-soft/play-with-docker/storage"
+	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/storage"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 )

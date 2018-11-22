@@ -17,8 +17,8 @@ import (
 	"docker.io/go-docker/api/types/filters"
 	"docker.io/go-docker/api/types/network"
 	"github.com/gorilla/mux"
-	"github.com/lean-soft/play-with-docker/config"
-	"github.com/lean-soft/play-with-docker/router"
+	"github.com/leansoftx/play-with-docker/config"
+	"github.com/leansoftx/play-with-docker/router"
 	"github.com/shirou/gopsutil/load"
 	"github.com/urfave/negroni"
 )

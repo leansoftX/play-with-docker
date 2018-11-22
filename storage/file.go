@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/pwd/types"
 )
 
 type storage struct {

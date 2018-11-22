@@ -7,7 +7,7 @@ import (
 	"time"
 
 	docker "docker.io/go-docker"
-	"github.com/lean-soft/play-with-docker/config"
+	"github.com/leansoftx/play-with-docker/config"
 	"github.com/shirou/gopsutil/load"
 )
 

@@ -1,8 +1,8 @@
 package pwd
 
 import (
-	"github.com/lean-soft/play-with-docker/pwd/types"
-	"github.com/lean-soft/play-with-docker/storage"
+	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/storage"
 )
 
 func (p *pwd) UserNewLoginRequest(providerName string) (*types.LoginRequest, error) {

@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/lean-soft/play-with-docker/config"
+	"github.com/leansoftx/play-with-docker/config"
 )
 
 type CookieID struct {

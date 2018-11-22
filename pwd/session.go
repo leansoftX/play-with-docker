@@ -12,9 +12,9 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"github.com/lean-soft/play-with-docker/docker"
-	"github.com/lean-soft/play-with-docker/event"
-	"github.com/lean-soft/play-with-docker/pwd/types"
+	"github.com/leansoftx/play-with-docker/docker"
+	"github.com/leansoftx/play-with-docker/event"
+	"github.com/leansoftx/play-with-docker/pwd/types"
 )
 
 var preparedSessions = map[string]bool{}

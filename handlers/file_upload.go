@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/gorilla/mux"
-	"github.com/lean-soft/play-with-docker/storage"
+	"github.com/leansoftx/play-with-docker/storage"
 )
 
 func FileUpload(rw http.ResponseWriter, req *http.Request) {
