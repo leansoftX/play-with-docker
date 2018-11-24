@@ -6,9 +6,9 @@ import (
 
 	dockerTypes "docker.io/go-docker/api/types"
 	"docker.io/go-docker/api/types/swarm"
-	"github.com/leansoftx/play-with-docker/docker"
-	"github.com/leansoftx/play-with-docker/event"
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/docker"
+	"github.com/leansoftX/play-with-docker/event"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 	"github.com/stretchr/testify/assert"
 )
 

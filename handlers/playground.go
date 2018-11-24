@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/leansoftx/play-with-docker/config"
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/config"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 )
 
 func NewPlayground(rw http.ResponseWriter, req *http.Request) {

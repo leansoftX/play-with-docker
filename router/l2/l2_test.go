@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"github.com/leansoftx/play-with-docker/router"
+	"github.com/leansoftX/play-with-docker/router"
 	"github.com/stretchr/testify/assert"
 )
 

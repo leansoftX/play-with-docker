@@ -3,7 +3,7 @@ package storage
 import (
 	"errors"
 
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 )
 
 var NotFoundError = errors.New("NotFound")

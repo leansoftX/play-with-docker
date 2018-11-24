@@ -9,8 +9,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
-	"github.com/leansoftx/play-with-docker/event"
-	"github.com/leansoftx/play-with-docker/storage"
+	"github.com/leansoftX/play-with-docker/event"
+	"github.com/leansoftX/play-with-docker/storage"
 	"github.com/satori/go.uuid"
 )
 

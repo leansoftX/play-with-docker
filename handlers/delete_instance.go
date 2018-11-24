@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/leansoftx/play-with-docker/storage"
+	"github.com/leansoftX/play-with-docker/storage"
 )
 
 func DeleteInstance(rw http.ResponseWriter, req *http.Request) {

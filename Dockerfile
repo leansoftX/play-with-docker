@@ -1,8 +1,8 @@
 FROM devopslabs.azurecr.io/pwd/devopslabs-pwd-base:latest
 
-COPY . /go/src/github.com/leansoftx/play-with-docker
+COPY . /go/src/github.com/leansoftX/play-with-docker
 
-WORKDIR /go/src/github.com/leansoftx/play-with-docker
+WORKDIR /go/src/github.com/leansoftX/play-with-docker
 
 RUN dep ensure
 

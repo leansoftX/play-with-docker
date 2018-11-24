@@ -6,9 +6,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/leansoftx/play-with-docker/config"
-	"github.com/leansoftx/play-with-docker/event"
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/config"
+	"github.com/leansoftX/play-with-docker/event"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 )
 
 func (p *pwd) InstanceResizeTerminal(instance *types.Instance, rows, cols uint) error {

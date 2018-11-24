@@ -1,7 +1,7 @@
 package docker
 
 import (
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 	"github.com/stretchr/testify/mock"
 )
 

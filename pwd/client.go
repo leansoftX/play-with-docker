@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/leansoftx/play-with-docker/event"
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/event"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 )
 
 func (p *pwd) ClientNew(id string, session *types.Session) *types.Client {

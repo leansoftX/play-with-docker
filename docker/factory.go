@@ -11,8 +11,8 @@ import (
 	client "docker.io/go-docker"
 	"docker.io/go-docker/api"
 	"github.com/docker/go-connections/tlsconfig"
-	"github.com/leansoftx/play-with-docker/pwd/types"
-	"github.com/leansoftx/play-with-docker/router"
+	"github.com/leansoftX/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/router"
 )
 
 type FactoryApi interface {

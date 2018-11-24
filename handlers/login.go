@@ -12,8 +12,8 @@ import (
 	"github.com/google/go-github/github"
 	"github.com/gorilla/mux"
 	fb "github.com/huandu/facebook"
-	"github.com/leansoftx/play-with-docker/config"
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/config"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 	"github.com/satori/go.uuid"
 )
 

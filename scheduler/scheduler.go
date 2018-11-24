@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/leansoftx/play-with-docker/event"
-	"github.com/leansoftx/play-with-docker/pwd"
-	"github.com/leansoftx/play-with-docker/pwd/types"
-	"github.com/leansoftx/play-with-docker/storage"
+	"github.com/leansoftX/play-with-docker/event"
+	"github.com/leansoftX/play-with-docker/pwd"
+	"github.com/leansoftX/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/storage"
 )
 
 type Task interface {

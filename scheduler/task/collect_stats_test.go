@@ -8,10 +8,10 @@ import (
 	"testing"
 
 	dockerTypes "docker.io/go-docker/api/types"
-	"github.com/leansoftx/play-with-docker/docker"
-	"github.com/leansoftx/play-with-docker/event"
-	"github.com/leansoftx/play-with-docker/pwd/types"
-	"github.com/leansoftx/play-with-docker/storage"
+	"github.com/leansoftX/play-with-docker/docker"
+	"github.com/leansoftX/play-with-docker/event"
+	"github.com/leansoftX/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/storage"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

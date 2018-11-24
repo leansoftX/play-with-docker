@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/leansoftx/play-with-docker/config"
-	"github.com/leansoftx/play-with-docker/provisioner"
-	"github.com/leansoftx/play-with-docker/pwd/types"
+	"github.com/leansoftX/play-with-docker/config"
+	"github.com/leansoftX/play-with-docker/provisioner"
+	"github.com/leansoftX/play-with-docker/pwd/types"
 )
 
 type NewSessionResponse struct {
