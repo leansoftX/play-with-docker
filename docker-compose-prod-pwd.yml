@@ -13,7 +13,7 @@ services:
         # pwd daemon container always needs to be named this way
         container_name: pwd
         # use the latest golang image
-        image: devopslabs.azurecr.io/pwd/devopslabs-pwd:%{Build.BuildId}%
+        image: devopslabs.azurecr.io/pwd/devopslabs-pwd:github-%{Build.BuildId}%
         # go to the right place and starts the app
         #command: /bin/sh -c 'ssh-keygen -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key >/dev/null; cd /go/src/github.com/leansoftX/play-with-docker; go run api.go -save /pwd/sessions -name l2'
         volumes:
@@ -36,7 +36,7 @@ services:
     l2:
         container_name: l2
         # use the latest golang image
-        image: devopslabs.azurecr.io/pwd/devopslabs-pwd-l2:%{Build.BuildId}%
+        image: devopslabs.azurecr.io/pwd/devopslabs-pwd-l2:github-%{Build.BuildId}%
         # go to the right place and starts the app
         # command: /bin/sh -c 'ssh-keygen -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key >/dev/null; cd /go/src/github.com/leansoftX/play-with-docker/router/l2; go run l2.go -ssh_key_path /etc/ssh/ssh_host_rsa_key -name l2 -save /pwd/networks'
         volumes:
