@@ -7,7 +7,7 @@ Under the hood DIND or Docker-in-Docker is used to give the effect of multiple V
 
 A live version is available at: http://play-with-docker.com/
 
-https://dev.azure.com/leansoftx/play-with-docker/_apis/build/status/pwd-CI
+[![Build Status](https://dev.azure.com/leansoftx/play-with-docker/_apis/build/status/pwd-CI)](https://dev.azure.com/leansoftx/play-with-docker/_build/latest?definitionId=9)
 
 ## Requirements
 
