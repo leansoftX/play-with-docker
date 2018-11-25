@@ -9,6 +9,8 @@ A live version is available at: http://play-with-docker.com/
 
 [![Build Status](https://dev.azure.com/leansoftx/play-with-docker/_apis/build/status/pwd-CI)](https://dev.azure.com/leansoftx/play-with-docker/_build/latest?definitionId=9)
 
+[![Release Status](https://vsrm.dev.azure.com/leansoftx/_apis/public/Release/badge/b7301165-bfcb-4b8f-a11c-c8aa9f190ce2/1/1)](https://dev.azure.com/leansoftx/play-with-docker/_release?view=mine&definitionId=1)
+
 ## Requirements
 
 Docker 1.13+ is required. 
