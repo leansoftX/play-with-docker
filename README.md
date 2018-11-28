@@ -49,7 +49,7 @@ docker pull franela/dind
 
 4) Point to http://localhost and click "New Instance"
 
-Notes:
+说明:
 
 * There is a hard-coded limit to 5 Docker playgrounds per session. After 4 hours sessions are deleted.
 * If you want to override the DIND version or image then set the environmental variable i.e.
